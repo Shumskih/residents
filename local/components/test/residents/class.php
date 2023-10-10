@@ -4,8 +4,6 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 }
 
-/** @var array $arParams */
-
 use Bitrix\Main\Loader;
 use Bitrix\Main\Context;
 use \Bitrix\Iblock\Iblock;
@@ -38,7 +36,8 @@ class Residents extends CBitrixComponent
         $taggedCache = Application::getInstance()->getTaggedCache();
         $cachePath = 'residents';
         $cacheTtl = 3153600;
-        $cacheKey = 'residents_nav-residents' . Context::getCurrent()->getRequest()->getQuery('PAGEN_1');
+        $cacheKey = 'residents_nav-residents'
+            . Context::getCurrent()->getRequest()->getQuery('PAGEN_1');
         $items = [];
         $nav = null;
 
@@ -50,7 +49,9 @@ class Residents extends CBitrixComponent
             $taggedCache->startTagCache($cachePath);
             $nav = $this->getNavObject();
             $items = $this->getResidents($nav);
-            $nav->setRecordCount($this->entityDataClass::getCount(['ACTIVE' => 'Y']));
+            $nav->setRecordCount(
+                $this->entityDataClass::getCount(['ACTIVE' => 'Y'])
+            );
 
             $vars = [
                 'nav' => $nav,
@@ -94,7 +95,12 @@ class Residents extends CBitrixComponent
         $this->entityDataClass = $iblock->getEntityDataClass();
         $elements = $this->entityDataClass::getList([
             'filter' => ['ACTIVE' => 'Y'],
-            'select' => ['Fio', 'Home.ELEMENT.Number', 'Home.ELEMENT.Street', 'Home.ELEMENT.City'],
+            'select' => [
+                'Fio',
+                'Home.ELEMENT.Number',
+                'Home.ELEMENT.Street',
+                'Home.ELEMENT.City'
+            ],
             'offset' => $nav->getOffset(),
             'limit' => $nav->getLimit(),
         ])->fetchCollection();
