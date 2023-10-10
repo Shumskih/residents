@@ -19,6 +19,15 @@ class residents extends CBitrixComponent
     private int $iBlockId;
     private string $entityDataClass;
 
+    public function onPrepareComponentParams($arParams): array
+    {
+        if (empty($arParams['LIMIT'])) {
+            $arParams['LIMIT'] = 3;
+        }
+
+        return $arParams;
+    }
+
     public function executeComponent(): array
     {
         if (!Loader::includeModule('iblock')) {
