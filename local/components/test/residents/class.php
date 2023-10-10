@@ -14,7 +14,7 @@ use \Bitrix\Main\Application;
 use Bitrix\Iblock\IblockTable;
 use Bitrix\Main\UI\PageNavigation;
 
-class residents extends CBitrixComponent
+class Residents extends CBitrixComponent
 {
     private int $iBlockId;
     private string $entityDataClass;
